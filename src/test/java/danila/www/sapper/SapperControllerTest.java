@@ -31,7 +31,6 @@ class SapperControllerTest {
         SapperDto.GameResponse mockResponse = new SapperDto.GameResponse(
                 1L, 10, 10, 10, false, new String[10][10]
         );
-
         when(sapperService.createGame(any())).thenReturn(mockResponse);
         mockMvc.perform(post("/api/new")
                         .contentType(MediaType.APPLICATION_JSON)
