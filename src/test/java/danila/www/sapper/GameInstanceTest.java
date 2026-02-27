@@ -22,7 +22,6 @@ class GameInstanceTest {
                 .filter(c -> c == 'X').count();
         assertEquals(1, minesCount, "Должна быть ровно одна мина");
     }
-
     @Test
     void testWinCondition() {
         char[][] board = game.getBoard();
@@ -35,7 +34,6 @@ class GameInstanceTest {
         }
         assertTrue(game.isCompleted(), "Игра должна быть завершена победой");
     }
-
     @Test
     void testLoseCondition() {
         for (int r = 0; r < 3; r++) {

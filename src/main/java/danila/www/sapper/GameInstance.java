@@ -26,12 +26,10 @@ public class GameInstance {
             Arrays.fill(board[i],'0');
             Arrays.fill(view[i],"-");
         });
-
         new Random().ints(0,width*height)
                 .distinct()
                 .limit(minesCount)
                 .forEach(ps-> board[ps/width][ps%height]='X');
-
         IntStream.range(0, height).parallel().forEach(r -> {
             for (int c = 0; c < width; c++) {
                 if (board[r][c] != 'X') {
@@ -41,7 +39,6 @@ public class GameInstance {
             }
         });
     }
-
     private long countNearbyMines(int r, int c) {
         int count = 0;
 
@@ -55,7 +52,6 @@ public class GameInstance {
         }
          return count;
     }
-
     public void uppdateTurn(int col, int row) {
         this.activity = LocalDateTime.now();
         if (board[row][col] == 'X') {
@@ -65,8 +61,6 @@ public class GameInstance {
             if (checkWin()) finish(true);
         }
     }
-
-
     private void openBFS(int startCol, int startRow) {
         Deque<int[]> deque = new ArrayDeque<>();
         deque.add(new int[]{startRow, startCol});
@@ -85,21 +79,15 @@ public class GameInstance {
                         }
                 }
             }
-
-
         }
     }
-
-
         private boolean isSafe(int r, int c) {
             return r >= 0 && r < height && c >= 0 && c < width;
         }
-
         private boolean checkWin() {
             long opened = Arrays.stream(view).flatMap(Arrays::stream).filter(s -> !s.equals("-")).count();
             return opened == (long) width * height - minesCount;
         }
-
         private void finish(boolean won) {
             this.completed = true;
             IntStream.range(0, height).parallel().forEach(r -> {
@@ -109,7 +97,6 @@ public class GameInstance {
                 }
             });
         }
-
         public SapperDto.GameResponse toResponse() {
             return new SapperDto.GameResponse(id, width, height, minesCount, completed, view);
         }

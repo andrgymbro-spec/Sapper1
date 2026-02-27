@@ -31,7 +31,6 @@ public class SapperService {
         if(game.isCompleted()) throw new IllegalArgumentException("Игра уже завершена");
         game.uppdateTurn(request.col(),request.row());
         return game.toResponse();
-
     }
     @Scheduled(fixedRate = 600000)
     public void clean (){

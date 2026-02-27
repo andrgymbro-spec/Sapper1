@@ -33,14 +33,12 @@ class SapperControllerTest {
         );
 
         when(sapperService.createGame(any())).thenReturn(mockResponse);
-
         mockMvc.perform(post("/api/new")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"width\":10, \"height\":10, \"mines_count\":10}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.game_id").value(1));
     }
-
     @Test
     @DisplayName("Обработка ошибки при неверном ходе")
     void testTurnError() throws Exception {
